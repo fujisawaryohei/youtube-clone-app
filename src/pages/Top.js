@@ -1,23 +1,38 @@
-import React, { useEffect, useContext } from 'react'
+import React, {useEffect} from 'react'
 import Layout from '../components/Layout/Layout'
-import { fetchPopularData } from '../apis/index'
-import { Store } from '../store/index'
+import {YOUTUBE_KEY} from '../apis/index'
+import {store, useAppDispatch} from "../store";
+import {popularsAdapter, requestGetPopular} from "../stores/popular";
+import Popular from "./Popular";
 
 const Top = () => {
-  const { globalState, setGlobalState } = useContext(Store)
+	const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    fetchPopularData().then((res) => {
-      console.log('data', res)
-      setGlobalState({ type: 'SET_POPULAR', payload: { popular: res.data.items } })
-    })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-  return (
-    <Layout>
-      <p>this is the top page</p>
-    </Layout>
-  )
+	const fetch = () => {
+		const params = {
+			params: {
+				part: "snippet",
+				maxResult: 40,
+				key: YOUTUBE_KEY,
+				regionCode: 'JP',
+				type: "video",
+				chart: "mostPopular",
+			}
+		}
+		dispatch(requestGetPopular(params));
+	}
+
+	useEffect(() => {
+		//雑に呼び出す
+		fetch();
+	}, [])
+
+	return (
+		<Layout>
+			<p>this is the top page</p>
+			<Popular/>
+		</Layout>
+	)
 }
 
 export default Top
