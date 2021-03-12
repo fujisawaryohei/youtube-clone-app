@@ -3,7 +3,8 @@ import {
 	getDefaultMiddleware,
 	combineReducers,
 } from '@reduxjs/toolkit';
-import {useDispatch} from 'react-redux';
+
+import { useDispatch } from 'react-redux';
 
 import popularReducer from './stores/popular';
 
