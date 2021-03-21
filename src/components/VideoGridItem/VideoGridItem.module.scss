@@ -1,7 +1,16 @@
 .item {
   display: block;
   width: 22.5%;
-  height: 1.5rem 1.25%;
+  margin: 1.5rem 1.25%;
+  @media screen and (max-width: 960px) {
+    width: 45%;
+    margin: 1rem 2.5%;
+  }
+
+  @media screen and (max-width: 560px) {
+    width: 90%;
+    margin: 1rem auto;
+  }
   text-decoration: none;
   img {
     width: 100%;
