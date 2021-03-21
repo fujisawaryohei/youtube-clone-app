@@ -7,7 +7,6 @@ const youtube = axios.create({
 })
 
 export const fetchPopularData = async (params) => {
-  // 本当は try catchとかでエラー拾ってあげた方がいいんだろうけどスルーする
   const response = await youtube.get('/videos', params)
   return response.data
 }
